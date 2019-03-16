@@ -4,36 +4,29 @@
 #
 Name     : R-Amelia
 Version  : 1.7.5
-Release  : 7
+Release  : 8
 URL      : https://cran.r-project.org/src/contrib/Amelia_1.7.5.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Amelia_1.7.5.tar.gz
 Summary  : A Program for Missing Data
 Group    : Development/Tools
 License  : GPL-2.0+
-Requires: R-Amelia-lib
+Requires: R-Amelia-lib = %{version}-%{release}
 Requires: R-Rcpp
 Requires: R-RcppArmadillo
 BuildRequires : R-Rcpp
 BuildRequires : R-RcppArmadillo
-BuildRequires : clr-R-helpers
+BuildRequires : buildreq-R
 
 %description
-(such as a survey), from a time series (like variables collected for
-  each year in a country), or from a time-series-cross-sectional data
-  set (such as collected by years for each of several countries).
-  Amelia II implements our bootstrapping-based algorithm that gives
-  essentially the same answers as the standard IP or EMis approaches,
-  is usually considerably faster than existing approaches and can
-  handle many more variables.  Unlike Amelia I and other statistically
-  rigorous imputation software, it virtually never crashes (but please
-  let us know if you find to the contrary!).  The program also
-  generalizes existing approaches by allowing for trends in time series
-  across observations within a cross-sectional unit, as well as priors
-  that allow experts to incorporate beliefs they have about the values
-  of missing cells in their data.  Amelia II also includes useful
-  diagnostics of the fit of multiple imputation models.  The program
-  works from the R command line or via a graphical user interface that
-  does not require users to know R.
+##################################################
+##                                              ##
+## Amelia II: A Package for Missing Data        ##
+##                                              ##
+## James Honaker <jhonaker@iq.harvard.edu.edu>  ##
+## Gary King <king@harvard.edu>                 ##
+## Matthew Blackwell <m.blackwel@rochester.edu> ##
+##                                              ##
+##################################################
 
 %package lib
 Summary: lib components for the R-Amelia package.
@@ -51,11 +44,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530470584
+export SOURCE_DATE_EPOCH=1552710374
 
 %install
+export SOURCE_DATE_EPOCH=1552710374
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1530470584
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -73,9 +66,9 @@ echo "FFLAGS = $FFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library Amelia
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx2 ; mv $i.avx2 ~/.stash/; done
-echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " > ~/.R/Makevars
-echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " >> ~/.R/Makevars
-echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512  " >> ~/.R/Makevars
+echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize " > ~/.R/Makevars
+echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --preclean --install-tests --no-test-load --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library Amelia
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx512 ; mv $i.avx512 ~/.stash/; done
 echo "CFLAGS = $CFLAGS -ftree-vectorize " > ~/.R/Makevars
@@ -90,8 +83,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library Amelia|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  Amelia || :
 
 
 %files
@@ -149,8 +141,10 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/Amelia/help/paths.rds
 /usr/lib64/R/library/Amelia/html/00Index.html
 /usr/lib64/R/library/Amelia/html/R.css
-/usr/lib64/R/library/Amelia/libs/symbols.rds
 /usr/lib64/R/library/Amelia/test/transform.R
+/usr/lib64/R/library/Amelia/tests/bounds.R
+/usr/lib64/R/library/Amelia/tests/moPrep-test.R
+/usr/lib64/R/library/Amelia/tests/overimp.R
 
 %files lib
 %defattr(-,root,root,-)
