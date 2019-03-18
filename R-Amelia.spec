@@ -4,7 +4,7 @@
 #
 Name     : R-Amelia
 Version  : 1.7.5
-Release  : 11
+Release  : 12
 URL      : https://cran.r-project.org/src/contrib/Amelia_1.7.5.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Amelia_1.7.5.tar.gz
 Summary  : A Program for Missing Data
