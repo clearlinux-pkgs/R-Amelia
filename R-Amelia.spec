@@ -4,7 +4,7 @@
 #
 Name     : R-Amelia
 Version  : 1.7.5
-Release  : 17
+Release  : 18
 URL      : https://cran.r-project.org/src/contrib/Amelia_1.7.5.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Amelia_1.7.5.tar.gz
 Summary  : A Program for Missing Data
@@ -12,28 +12,21 @@ Group    : Development/Tools
 License  : GPL-2.0+
 Requires: R-Amelia-lib = %{version}-%{release}
 Requires: R-Rcpp
-Requires: R-RcppArmadillo
 BuildRequires : R-Rcpp
 BuildRequires : R-RcppArmadillo
 BuildRequires : buildreq-R
+BuildRequires : util-linux
 
 %description
-(such as a survey), from a time series (like variables collected for
-  each year in a country), or from a time-series-cross-sectional data
-  set (such as collected by years for each of several countries).
-  Amelia II implements our bootstrapping-based algorithm that gives
-  essentially the same answers as the standard IP or EMis approaches,
-  is usually considerably faster than existing approaches and can
-  handle many more variables.  Unlike Amelia I and other statistically
-  rigorous imputation software, it virtually never crashes (but please
-  let us know if you find to the contrary!).  The program also
-  generalizes existing approaches by allowing for trends in time series
-  across observations within a cross-sectional unit, as well as priors
-  that allow experts to incorporate beliefs they have about the values
-  of missing cells in their data.  Amelia II also includes useful
-  diagnostics of the fit of multiple imputation models.  The program
-  works from the R command line or via a graphical user interface that
-  does not require users to know R.
+##################################################
+##                                              ##
+## Amelia II: A Package for Missing Data        ##
+##                                              ##
+## James Honaker <jhonaker@iq.harvard.edu.edu>  ##
+## Gary King <king@harvard.edu>                 ##
+## Matthew Blackwell <m.blackwel@rochester.edu> ##
+##                                              ##
+##################################################
 
 %package lib
 Summary: lib components for the R-Amelia package.
@@ -51,10 +44,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1569353443
+export SOURCE_DATE_EPOCH=1571795274
 
 %install
-export SOURCE_DATE_EPOCH=1569353443
+export SOURCE_DATE_EPOCH=1571795274
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
