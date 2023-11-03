@@ -4,7 +4,7 @@
 #
 Name     : R-Amelia
 Version  : 1.8.1
-Release  : 47
+Release  : 48
 URL      : https://cran.r-project.org/src/contrib/Amelia_1.8.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Amelia_1.8.1.tar.gz
 Summary  : A Program for Missing Data
