@@ -1,5 +1,5 @@
 PKG_NAME := R-Amelia
-URL = https://cran.r-project.org/src/contrib/Amelia_1.8.2.tar.gz
+URL = https://ftp.osuosl.org/pub/cran/src/contrib/Amelia_1.8.3.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
